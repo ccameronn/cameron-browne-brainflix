@@ -1,0 +1,86 @@
+@use "./colors" as *;
+
+//Importing Fonts
+@font-face {
+  font-family: "AvenirNext";
+  src: url("../../assets/fonts/AvenirNextLTPro-Regular.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "AvenirNext";
+  src: url("../../assets/fonts/AvenirNextLTPro-Bold.otf") format("opentype");
+  font-style: normal;
+  font-weight: 700;
+}
+
+// Setting Text Styles
+@mixin regular-text($color, $font-size) {
+  font-family: "AvenirNext";
+  font-style: normal;
+  font-weight: 400;
+  color: $color;
+  font-size: $font-size;
+}
+
+@mixin bold-text($color, $font-size) {
+  font-family: AvenirNext;
+  font-style: normal;
+  font-weight: 700;
+  color: $color;
+  font-size: $font-size;
+}
+
+//Responsive Text Styles
+//Mobile
+@mixin mobile-page-header {
+  @include bold-text($BrainFlix-Black, 1.5rem);
+  line-height: 2rem;
+}
+
+@mixin mobile-section-header {
+  @include bold-text($BrainFlix-Black, 0.75rem);
+  line-height: 1.25rem;
+}
+
+@mixin mobile-subheader {
+  @include bold-text($BrainFlix-Black, 0.8125rem);
+  line-height: 1.125rem;
+}
+
+@mixin mobile-body-copy {
+  @include regular-text($BrainFlix-Black, 0.8125rem);
+  line-height: 1.125rem;
+}
+
+@mixin mobile-label-button {
+  @include bold-text($BrainFlix-Silver, 0.625rem);
+  line-height: 1.25rem;
+}
+
+//Desktop & Tablet
+@mixin tablet-page-header {
+  @include bold-text($BrainFlix-Black, 2.0625rem);
+  line-height: 2.75rem;
+}
+
+@mixin tablet-section-header {
+  @include bold-text($BrainFlix-Black, 0.75rem);
+  line-height: 1.25rem;
+}
+
+@mixin tablet-subheader {
+  @include bold-text($BrainFlix-Black, 0.875rem);
+  line-height: 1.375rem;
+}
+
+@mixin tablet-body-copy {
+  @include regular-text($BrainFlix-Black, 0.875rem);
+  line-height: 1.375rem;
+}
+
+@mixin tablet-label-button {
+  @include bold-text($BrainFlix-Silver, 0.75rem);
+  line-height: 1.25rem;
+}
