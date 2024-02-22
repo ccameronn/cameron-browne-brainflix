@@ -1,5 +1,3 @@
-import React from "react";
-
 import "./NavBar.scss";
 
 import logo from "../../assets/images/logo/BrainFlix-logo.svg";
