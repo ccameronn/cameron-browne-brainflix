@@ -7,4 +7,22 @@
 
 ol, ul {
   list-style: none;
+}
+
+.app__main {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 1280px) {
+  .app__main {
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 0rem 6rem;
+  }
+}
+@media (min-width: 1280px) {
+  .app__section {
+    border-right: solid 1px #E1E1E1;
+  }
 }/*# sourceMappingURL=App.css.map */

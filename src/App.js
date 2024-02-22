@@ -7,13 +7,15 @@ import VideoPlayer from "./components/VideoPlayer/VideoPlayer.js";
 import VideoDetails from "./components/VideoDetails/VideoDetails.js";
 import CommentForm from "./components/CommentForm/CommentForm.js";
 import Comments from "./components/Comments/Comments.js";
+import SideVideos from "./components/SideVideos/SideVideos.js";
+
 // IMPORT VIDEOS
 import VideoList from "./data/video-details.json";
 
 
 function App() {
 
-  // DEFINE SELECTED VIDEO USING STATE  
+  // DEFINING STATES 
   const [videos, setVideos] = useState(VideoList);
   const [selectedVideo, setSelectedVideo] = useState(VideoList[0]);
 
@@ -26,30 +28,19 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="app">
 
-    <NavBar />
-    <VideoPlayer video={selectedVideo} />
-
-    <main className="main-section">
-        <section className="main-section1">
-          <VideoDetails video={selectedVideo} />
-          <CommentForm video={selectedVideo} />
-          <Comments video={selectedVideo} />
-
-        </section>
-{/*}
-        <SideVideos filteredVideo={filteredVideo} />
-      */}
+      <NavBar />
+      <VideoPlayer video={selectedVideo} />
+      <main className="app__main">
+          <section className='app__section'>
+            <VideoDetails video={selectedVideo} />
+            <CommentForm />
+            <Comments video={selectedVideo} />
+          </section>
+          <SideVideos videos={videos} clickHandler={clickHandler} selectedVideo={selectedVideo} />
       </main>
 
-
-  {/*}
-
-
-
-      
-  */}
   
     </div>
   );

@@ -4,7 +4,7 @@ function CommentForm() {
   return (
     <section className="comment-form">
       <p className="comment-count">3 Comments</p>
-      <article novalidate className="form">
+      <article className="form">
         <div className="form__icon"></div>
         <form className="form__fields-container">
           <label for="text">JOIN THE CONVERSATION</label>
