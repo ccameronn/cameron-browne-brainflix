@@ -1,0 +1,135 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/responsive" as *;
+@use "../../styles/partials/fonts" as *;
+
+
+.active-video-details {
+    padding: 1.5rem 1rem 1rem 1rem;
+  
+    @include tablet {
+      padding: 1.5rem 2rem 1rem 2rem;
+    }
+  
+    @include desktop {
+      padding: 2rem 0 1rem 0rem;
+    }
+  
+    &__title {
+      @include mobile-page-header;
+      padding-bottom: 1rem;
+  
+      @include tablet {
+        @include tablet-page-header;
+      }
+    }
+  
+    &__description {
+      padding-top: 1rem;
+      @include mobile-body-copy;
+  
+      @include tablet {
+        @include tablet-body-copy;
+      }
+  
+      @include desktop {
+        padding-right: 1.5rem;
+      }
+    }
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: flex-start;
+    padding: 1rem 0;
+    border-top: 1px solid $BrainFlix-Mercury;
+    border-bottom: 1px solid $BrainFlix-Mercury;
+  
+    @include tablet {
+      align-items: center;
+      border-top: none;
+    }
+  
+    @include desktop {
+      padding-right: 1.5rem;
+    }
+  
+    &__left {
+      width: 50%;
+  
+      @include tablet {
+        display: flex;
+        align-items: center;
+      }
+    }
+  
+    &__channel {
+      @include mobile-subheader;
+      font-weight: bold;
+      padding-bottom: 1rem;
+  
+      @include tablet {
+        @include tablet-subheader;
+        padding: 0 2rem 0 0;
+      }
+    }
+  
+    &__date {
+      @include mobile-body-copy;
+      color: $BrainFlix-Silver;
+  
+      @include tablet {
+        @include tablet-body-copy;
+        color: $BrainFlix-Silver;
+      }
+    }
+  
+    &__right {
+      width: 50%;
+  
+      @include tablet {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+    }
+  
+    &__views {
+      display: flex;
+      padding-bottom: 1rem;
+  
+      @include tablet {
+        padding: 0 2rem 0 0;
+      }
+  
+      &--icon {
+        padding-right: 1rem;
+      }
+  
+      &--count {
+        @include mobile-body-copy;
+        color: $BrainFlix-Silver;
+  
+        @include tablet {
+          @include tablet-body-copy;
+          color: $BrainFlix-Silver;
+        }
+      }
+    }
+  
+    &__likes {
+      display: flex;
+      &--icon {
+        padding-right: 1rem;
+      }
+  
+      &--count {
+        @include mobile-body-copy;
+        color: $BrainFlix-Silver;
+  
+        @include tablet {
+          @include tablet-body-copy;
+          color: $BrainFlix-Silver;
+        }
+      }
+    }
+  }

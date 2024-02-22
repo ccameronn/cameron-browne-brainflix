@@ -1,0 +1,116 @@
+@use '../../styles/partials/reset' as *;
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/responsive' as *;
+@use '../../styles/partials/fonts' as *;
+
+.comment-form {
+    padding: 0 1rem;
+}
+
+.comment-count {
+    @include mobile-subheader;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid $BrainFlix-Mercury;
+
+  @include tablet {
+    padding: 2.25rem;
+  }
+
+  @include desktop {
+    padding: 2.25rem 0;
+    margin: 0 20rem;
+  }
+
+  &__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-top: 27px;
+    background-image: url(/assets/images/Mohan-muruge.jpg);
+    background-size: cover;
+    flex: 0 0 auto;
+
+    @include tablet {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 1rem;
+  }
+
+  &__input {
+    padding: 0.75rem;
+    min-height: 2.25rem;
+    border: 1px solid $BrainFlix-Mercury;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    @include mobile-body-copy;
+    color: $BrainFlix-Black;
+
+    @include tablet {
+      min-height: 3rem;
+      padding: 1rem;
+      margin-bottom: 2.25rem;
+      @include tablet-body-copy;
+    }
+  }
+
+  textarea,
+  input {
+    background-color: $BrainFlix-Alabaster;
+  }
+
+  textarea:active,
+  input:active {
+    border: 1px solid $BrainFlix-Black;
+    background-color: $BrainFlix-White;
+  }
+
+
+
+  &__button {
+    height: 2.5rem;
+    background-color: $BrainFlix-Blue;
+    background-image: url(../../assets/images/icons/add_comment.svg);
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    border: none;
+    @include mobile-label-button;
+    color: $BrainFlix-White;
+    cursor: pointer;
+
+    @include tablet {
+      width: 30%;
+      align-self: flex-end;
+      @include tablet-label-button;
+      color: $BrainFlix-White;
+    }
+  }
+
+  &__button:hover {
+    background-color: $BrainFlix-DarkBlack
+  }
+}
+
+label {
+    padding-bottom: 4px;
+    @include mobile-label-button;
+    color: $BrainFlix-Silver;
+  
+    @include tablet {
+      @include tablet-label-button;
+      color: $BrainFlix-Silver;
+    }
+  }
