@@ -1,0 +1,78 @@
+@use '../../styles/partials/colors' as *;
+@use '../../styles/partials/responsive' as *;
+@use '../../styles/partials/fonts' as *;
+
+.comment-list {
+    padding: 0 1rem 1rem 1rem;
+}
+
+.comment {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  padding: 1rem 0;
+  border-bottom: 1px solid $BrainFlix-Mercury;
+
+  @include tablet {
+    padding: 2.25rem;
+  }
+
+  @include desktop {
+    padding: 2.25rem 0;
+    margin: 0 20rem;
+  }
+
+  &__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+    background-color: $BrainFlix-Mercury;
+
+    @include tablet {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  &__main {
+    width: 100%;
+    margin-left: 1rem;
+  }
+
+  &__main-namedate {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+  }
+
+  &__name {
+    @include mobile-body-copy;
+    font-weight: bold;
+
+    @include tablet {
+      @include tablet-body-copy;
+      font-weight: bold;
+    }
+  }
+
+  &__date {
+    @include mobile-body-copy;
+    color: $BrainFlix-Silver;
+
+    @include tablet {
+      @include tablet-body-copy;
+      color: $BrainFlix-Silver;
+    }
+  }
+
+  &__text {
+    @include mobile-body-copy;
+
+    @include tablet {
+      @include tablet-body-copy;
+    }
+  }
+}
