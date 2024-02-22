@@ -4,21 +4,31 @@ function CommentForm() {
   return (
     <section className="comment-form">
       <p className="comment-count">3 Comments</p>
-      <article novalidate class="form">
-        <div class="form__icon"></div>
-        <form class="form__fields">
+      <article novalidate className="form">
+        <div className="form__icon"></div>
+        <form className="form__fields-container">
           <label for="text">JOIN THE CONVERSATION</label>
-          <textarea
+          <div className="form__fields">
+            <textarea
             placeholder="Add a new comment"
             name="text"
             rows="5"
             required
-            class="form__input"
+            className="form__input"
             id="comment"
-          ></textarea>
-          <button type="submit" class="form__button">
+            ></textarea>
+            <input
+            placeholder="Add a new comment"
+            name="text"
+            rows="5"
+            required
+            className="form__input-tablet"
+            id="comment"
+            ></input>
+            <button type="submit" className="form__button">
             COMMENT
-          </button>
+            </button>
+          </div>
         </form>
       </article>
     </section>

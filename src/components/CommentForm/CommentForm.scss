@@ -42,11 +42,26 @@
     }
   }
 
-  &__fields {
+  &__fields-container {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-left: 1rem;
+
+    
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    @include tablet {
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: center;
+    }
+
   }
 
   &__input {
@@ -59,11 +74,25 @@
     color: $BrainFlix-Black;
 
     @include tablet {
-      min-height: 3rem;
-      padding: 1rem;
-      margin-bottom: 2.25rem;
-      @include tablet-body-copy;
+      display: none;
     }
+  }
+
+  &__input-tablet {
+    display: none;
+
+    @include tablet {
+        display: block;
+        min-height: 2.5rem;
+        width: 70%;
+        margin-right: 2rem;
+        margin-bottom: 0;
+        @include tablet-body-copy;
+        padding: 0.75rem;
+        border: 1px solid $BrainFlix-Mercury;
+        border-radius: 4px;
+        color: $BrainFlix-Black;
+      }
   }
 
   textarea,
@@ -96,6 +125,7 @@
       align-self: flex-end;
       @include tablet-label-button;
       color: $BrainFlix-White;
+      min-height: 3rem;;
     }
   }
 
