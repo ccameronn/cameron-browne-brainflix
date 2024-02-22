@@ -1,26 +1,53 @@
 import './App.scss';
-import NavBar from "./components/NavBar/NavBar";
+import { useState } from "react";
+
+// IMPORT COMPONENTS
+import NavBar from "./components/NavBar/NavBar.js";
+import VideoPlayer from "./components/VideoPlayer/VideoPlayer.js";
+// import VideoDetails from "./components/VideoDetails/VideoDetails.js";
+
+
+// IMPORT VIDEOS
+import VideoList from "./data/video-details.json";
+
 
 function App() {
+
+  // DEFINE SELECTED VIDEO USING STATE  
+  const [videos, setVideos] = useState(VideoList);
+  const [selectedVideo, setSelectedVideo] = useState(VideoList[0]);
+
+
+  const clickHandler = (video) => {
+    setSelectedVideo(video);
+  };
+
+
+
+
   return (
     <div className="App">
 
-    {/*
-        <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    */}
-
     <NavBar />
 
+    <VideoPlayer video={selectedVideo} />
 
 
+
+  {/*}
+
+
+
+      <main className="main-section">
+        <section className="main-section1">
+          <VideoDetails video={selectedVideo} />
+          <CommentForm video={selectedVideo} />
+          <Comments video={selectedVideo} />
+        </section>
+        <SideVideos filteredVideo={filteredVideo} />
+      </main>
+  */}
+  
     </div>
   );
 }
