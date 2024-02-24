@@ -2,7 +2,7 @@ import "./NavBar.scss";
 
 import logo from "../../assets/images/logo/BrainFlix-logo.svg";
 
-function Nav() {
+const Nav = () => {
 
   return (
     <nav className="nav">

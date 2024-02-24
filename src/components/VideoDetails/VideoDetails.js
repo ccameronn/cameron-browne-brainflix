@@ -3,7 +3,7 @@ import "./VideoDetails.scss";
 import viewsIcon from "../../assets/images/icons/views.svg";
 import likesIcon from "../../assets/images/icons/likes.svg";
 
-function VideoDetails({ video }) {
+const VideoDetails = ({ video }) => {
 
     var timestamp = new Date(video.timestamp);
 

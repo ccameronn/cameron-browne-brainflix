@@ -5,7 +5,7 @@ function convertDate(timestamp) {
     return (time.toLocaleDateString())
 }
 
-function Comments({video}) {
+const Comments = ({video}) => {
   return (
     <section className="comment-list">
       {video.comments.map((comment) => (
