@@ -17,11 +17,11 @@ const VideoDetails = ({ video }) => {
         </div>
         <div className="stats__right">
           <div className="stats__views">
-            <img src={viewsIcon} className="stats__views--icon"></img>
+            <img src={viewsIcon} className="stats__views--icon" alt="views icon"></img>
             <p className="stats__views--count">{video.views}</p>
           </div>
           <div className="stats__likes">
-            <img src={likesIcon} className="stats__likes--icon"></img>
+            <img src={likesIcon} className="stats__likes--icon" alt="likes icon"></img>
             <p className="stats__likes--count">{video.likes}</p>
           </div>
         </div>
