@@ -1,5 +1,5 @@
 import './App.scss';
-import { useState } from "react";
+import { useState , useEffect } from "react";
 
 // IMPORT COMPONENTS
 import NavBar from "./components/NavBar/NavBar.js";
@@ -10,38 +10,61 @@ import Comments from "./components/Comments/Comments.js";
 import SideVideos from "./components/SideVideos/SideVideos.js";
 
 // IMPORT VIDEOS
-import VideoList from "./data/video-details.json";
+import VideoListDetails from "./data/video-details.json";
+import VideoList from "./data/videos.json";
 
 
 function App() {
 
   // DEFINING STATES 
-  const [videos, setVideos] = useState(VideoList);
-  const [selectedVideo, setSelectedVideo] = useState(VideoList[0]);
+  const [sideVideos, setSideVideos] = useState(VideoList);
+  const [selectedVideo, setSelectedVideo] = useState(VideoListDetails[0]);
+  const [commentCount, setCommentCount] = useState(0);
+
+  //  UTILS
+
+useEffect(() => {
+
+  // filter imported video list and set
+  const filteredSideVideos = VideoList.filter((video) => {
+    return video.id !== selectedVideo.id;
+  });
+  setSideVideos(filteredSideVideos);
+
+  // define comment count
+  const selectedVideoComments = selectedVideo.comments;
+  setCommentCount(selectedVideoComments.length);
+}, [selectedVideo]);
+
+
 
 
   const clickHandler = (video) => {
-    setSelectedVideo(video);
+    // find the vid in vid details that matches the vid in vid list
+    const videoDetails = VideoListDetails.find((element) => element.id === video.id);
+
+    setSelectedVideo(videoDetails);
   };
 
-
+ 
 
 
   return (
     <div className="app">
 
       <NavBar />
+
       <VideoPlayer video={selectedVideo} />
+
       <main className="app__main">
           <section className='app__section'>
             <VideoDetails video={selectedVideo} />
-            <CommentForm />
+            <CommentForm commentCount={commentCount}/>
             <Comments video={selectedVideo} />
           </section>
-          <SideVideos videos={videos} clickHandler={clickHandler} selectedVideo={selectedVideo} />
+          <SideVideos videos={sideVideos} clickHandler={clickHandler}/>
       </main>
 
-  
     </div>
   );
 }

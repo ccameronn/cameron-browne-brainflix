@@ -1,9 +1,11 @@
 import "./CommentForm.scss";
 
-const CommentForm = () => {
+const CommentForm = ({ commentCount }) => {
+
+
   return (
     <section className="comment-form">
-      <p className="comment-counter">3 Comments</p>
+      <p className="comment-counter">{commentCount} Comments</p>
       <article className="form">
         <div className="form__icon"></div>
         <form className="form__fields-container">

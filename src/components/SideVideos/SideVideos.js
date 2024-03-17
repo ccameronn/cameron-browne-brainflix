@@ -1,16 +1,14 @@
 import "./SideVideos.scss";
 
-const SideVideos = ({videos, clickHandler, selectedVideo}) => {
+const SideVideos = ({videos, clickHandler}) => {
 
-    const filteredVideos = videos.filter((video) => {
-    return video.id !== selectedVideo.id;
-  });
+
 
   return (
     <section className="side-videos">
       <h2 className="side-videos__title">NEXT VIDEOS</h2>
       <ul className="video-list">
-        {filteredVideos.map((video) => {
+        {videos.map((video) => {
           return (
             <li
               onClick={() => {
