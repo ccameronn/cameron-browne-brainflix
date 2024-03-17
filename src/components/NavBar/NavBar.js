@@ -1,14 +1,17 @@
 import "./NavBar.scss";
 
+import { Link, useNavigate } from "react-router-dom";
+
 import logo from "../../assets/images/logo/BrainFlix-logo.svg";
 
 const Nav = () => {
+  const navigate = useNavigate();
 
   return (
     <nav className="nav">
-      <a src="/">
+      <Link  to={`/`}>
         <img src={logo} alt="BrainFlix Logo" className="nav__logo" />
-      </a>
+      </Link>
       <div className="nav__container">
         <input
             type="search"
@@ -16,14 +19,18 @@ const Nav = () => {
           className="nav__search"
           id="search-input"
         ></input>
-        <a src="/" className="nav__upload-buttons button-tablet">
+        <button onClick={() => {
+          navigate("/upload");
+        }} className="nav__upload-buttons button-tablet">
           UPLOAD
-        </a>
+        </button>
         <div className="nav__avatar"></div>
       </div>
-      <a src="/" className="nav__upload-buttons button-mobile">
+      <button onClick={() => {
+        navigate("/upload");
+      }} className="nav__upload-buttons button-mobile">
         UPLOAD
-      </a>
+      </button>
     </nav>
   );
 }

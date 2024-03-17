@@ -1,9 +1,8 @@
 import './VideoPage.scss';
 import { useState , useEffect } from "react";
-import { BrowserRouter , Routes, Route } from "react-router-dom";
+import { useParams , useNavigate } from "react-router-dom";
 
 // IMPORT COMPONENTS
-import NavBar from "../../components/NavBar/NavBar.js";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.js";
 import VideoDetails from "../../components/VideoDetails/VideoDetails.js";
 import CommentForm from "../../components/CommentForm/CommentForm.js";
@@ -22,29 +21,45 @@ function VideoPage() {
   const [selectedVideo, setSelectedVideo] = useState(VideoListDetails[0]);
   const [commentCount, setCommentCount] = useState(0);
 
-  //  UTILS
 
-useEffect(() => {
+  const { videoId } = useParams();
 
-  // filter imported video list and set
-  const filteredSideVideos = VideoList.filter((video) => {
-    return video.id !== selectedVideo.id;
-  });
-  setSideVideos(filteredSideVideos);
+// When videoId is changed, rerender selectedVideo
 
-  // define comment count
-  const selectedVideoComments = selectedVideo.comments;
-  setCommentCount(selectedVideoComments.length);
-}, [selectedVideo]);
+  useEffect(() => {
+    VideoListDetails.forEach((video) => {
+        if (videoId === video.id) {setSelectedVideo(video)}
+    })
+  }, [videoId]);
 
 
+  //  When selectedVideo is updated, rerender sideVideos
 
+    useEffect(() => {
+
+    // filter imported video list and set
+    const filteredSideVideos = VideoList.filter((video) => {
+        return video.id !== selectedVideo.id;
+    });
+    setSideVideos(filteredSideVideos);
+
+    // define comment count
+    const selectedVideoComments = selectedVideo.comments;
+    setCommentCount(selectedVideoComments.length);
+    }, [selectedVideo]);
+
+
+// When a video is clicked, redirect to page with that video id and update videoId to trigger rerender
+
+    let navigate = useNavigate();
 
   const clickHandler = (video) => {
     // find the vid in vid details that matches the vid in vid list
     const videoDetails = VideoListDetails.find((element) => element.id === video.id);
 
-    setSelectedVideo(videoDetails);
+    navigate(`/video/${videoDetails.id}`);
+
+    // setSelectedVideo(videoDetails);
   };
 
  
@@ -52,8 +67,6 @@ useEffect(() => {
 
   return (
     <div className="vid-page">
-
-      <NavBar />
 
       <VideoPlayer video={selectedVideo} />
 
