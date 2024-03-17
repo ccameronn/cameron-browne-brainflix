@@ -2,23 +2,3 @@
 @use './styles/partials/responsive' as *;
 @use './styles/partials/colors' as *;
 
-.app {
-        &__main {
-            display: flex;
-            flex-direction: column;
-
-            @include desktop {
-                justify-content: center;
-                align-items: center;
-                flex-direction: row;
-                padding: 0rem 6rem;
-            }
-        }
-
-        &__section {
-            @include desktop {
-                border-right: solid 1px $BrainFlix-Mercury;
-            }
-        }
-
-}

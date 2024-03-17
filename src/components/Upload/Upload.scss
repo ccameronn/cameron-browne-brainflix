@@ -1,0 +1,150 @@
+@use "../../styles/partials/reset" as *;
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/responsive" as *;
+@use "../../styles/partials/fonts" as *;
+
+.upload-section {
+  padding: 1rem;
+  border-top: 1px solid $BrainFlix-Mercury;
+
+  @include tablet {
+    padding: 1rem 2rem;
+  }
+
+  @include desktop {
+    padding: 1rem 6rem;
+  }
+
+  &__title {
+    @include mobile-page-header;
+    padding-bottom: 1rem;
+
+    @include tablet {
+      @include tablet-page-header;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include tablet {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+    }
+  }
+
+  &__publish {
+    @include mobile-label-button;
+    width: 100%;
+    color: $BrainFlix-White;
+    background-color: $BrainFlix-Blue;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 40px 12px 40px;
+    background-image: url(../../assets/images/icons/publish.svg);
+    background-position: 10px 50%;
+    background-repeat: no-repeat;
+    background-size: 1.25rem;
+    cursor: pointer;
+    align-items: center;
+
+    @include tablet {
+      width: 160px;
+      margin-left: 5rem;
+      @include tablet-label-button;
+      color: $BrainFlix-White;
+    }
+
+    &:hover {
+        background-color: $BrainFlix-DarkBlue;
+    }
+  }
+
+  &__cancel {
+    @include mobile-label-button;
+    color: $BrainFlix-Blue;
+    padding-top: 2rem;
+
+    @include tablet {
+      padding: 0;
+      @include tablet-label-button;
+      color: $BrainFlix-Blue;
+    }
+  }
+}
+
+.upload-form {
+  @include tablet {
+    padding-top: 1rem;
+    margin-bottom: 1rem;;
+    border-top: 1px solid $BrainFlix-Mercury;
+    border-bottom: 1px solid $BrainFlix-Mercury;
+  }
+
+  @include desktop {
+    display: flex;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    @include mobile-label-button;
+    padding-bottom: 1rem;
+
+    @include tablet {
+      @include tablet-label-button;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    border-radius: 4px;
+
+    @include tablet {
+      width: 50%;
+    }
+
+    @include desktop {
+      width: 100%;
+    }
+
+    &-container {
+      @include desktop {
+        width: 40%;
+        padding-right: 2rem;
+      }
+    }
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+
+    @include desktop {
+      width: 60%;
+      padding: 0;
+    }
+  }
+
+  &__input {
+    padding: 0.75rem;
+    min-height: 2.25rem;
+    border: 1px solid $BrainFlix-Mercury;
+    border-radius: 4px;
+    @include mobile-body-copy;
+
+    @include tablet {
+      @include tablet-body-copy;
+    }
+
+    &:focus {
+      border: 1px solid $BrainFlix-Blue;
+      outline: none;
+    }
+  }
+}
