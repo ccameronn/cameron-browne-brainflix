@@ -1,8 +1,10 @@
 import "./SideVideos.scss";
 
-const SideVideos = ({videos, clickHandler}) => {
+import { useNavigate } from "react-router-dom";
 
+const SideVideos = ({videos}) => {
 
+  let navigate = useNavigate();
 
   return (
     <section className="side-videos">
@@ -12,7 +14,7 @@ const SideVideos = ({videos, clickHandler}) => {
           return (
             <li
               onClick={() => {
-                clickHandler(video);
+                navigate(`/video/${video.id}`);
               }}
               key={video.id}
               className="video-list-item"

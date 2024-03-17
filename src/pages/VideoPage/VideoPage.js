@@ -49,21 +49,6 @@ function VideoPage() {
     }, [selectedVideo]);
 
 
-// When a video is clicked, redirect to page with that video id and update videoId to trigger rerender
-
-    let navigate = useNavigate();
-
-  const clickHandler = (video) => {
-    // find the vid in vid details that matches the vid in vid list
-    const videoDetails = VideoListDetails.find((element) => element.id === video.id);
-
-    navigate(`/video/${videoDetails.id}`);
-
-    // setSelectedVideo(videoDetails);
-  };
-
- 
-
 
   return (
     <div className="vid-page">
@@ -76,7 +61,7 @@ function VideoPage() {
             <CommentForm commentCount={commentCount}/>
             <Comments video={selectedVideo} />
           </section>
-          <SideVideos videos={sideVideos} clickHandler={clickHandler}/>
+          <SideVideos videos={sideVideos}/>
       </main>
 
     </div>
