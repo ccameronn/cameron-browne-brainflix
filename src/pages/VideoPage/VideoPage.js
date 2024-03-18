@@ -10,67 +10,113 @@ import CommentForm from "../../components/CommentForm/CommentForm.js";
 import Comments from "../../components/Comments/Comments.js";
 import SideVideos from "../../components/SideVideos/SideVideos.js";
 
-// IMPORT VIDEOS
-import VideoListDetails from "../../data/video-details.json";
-import VideoList from "../../data/videos.json";
+
 
 // FUNCTIONS TO CALL API
+const url = "https://project-2-api.herokuapp.com"
+const apiKey = "?api_key=" + "8e457c3e-7245-4c95-9d54-759c220f1b2d"
+
+const fetchVideos = async () => {
+  try {
+    return await axios.get(url + "/videos" + apiKey)
+  } catch (error) {
+    console.log("fetchVideos api call failed")
+  }
+}
+
+const fetchVideoDetails = async (videoId) => {
+  try {
+    return await axios.get(url + "/videos/" + videoId + apiKey)
+  } catch (error) {
+    console.log("fetchVideoDetails api call failed")
+  }
+}
 
 
 function VideoPage() {
 
   // DEFINING STATES 
-  const [sideVideos, setSideVideos] = useState(VideoList);
-  const [selectedVideo, setSelectedVideo] = useState(VideoListDetails[0]);
+  const [videoList, setvideoList] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [sideVideos, setSideVideos] = useState([]);
   const [commentCount, setCommentCount] = useState(0);
 
 
-
-
-// When videoId is changed, rerender selectedVideo
-
   const { videoId } = useParams();
 
+  // FETCH and SET VIDEO LIST AND SELECTED VIDEO DETAILS WHEN VIDEO ID CHANGES
+
   useEffect(() => {
-    VideoListDetails.forEach((video) => {
-        if (videoId === video.id) {setSelectedVideo(video)}
-    })
+    const fetchData = async () => {
+      // FETCH VIDEO LIST
+      const videoListApiCall = await fetchVideos();
+
+      // FETCH SELECTED VIDEO DETAILS
+
+      let videoDetailsApiCall = {};
+
+      if (videoId) {
+        let videoDetailsApiCall = await fetchVideoDetails(videoId);
+      } else {
+        let videoDetailsApiCall = await fetchVideoDetails(videoListApiCall.data[0].id)
+      
+      }
+
+      setvideoList(videoListApiCall.data);
+      setSelectedVideo(videoDetailsApiCall.data);
+
+
+    }
+    
+    fetchData()
+
+
   }, [videoId]);
 
 
-  //  When selectedVideo is updated, rerender sideVideos
 
-    useEffect(() => {
+    // //  Set sideVideos
+    // const filteredVideos = videoList.filter((video) => {
+    //   return video.id !== selectedVideo.id;
+    // });
+    // setSideVideos(filteredVideos);
+    
+    // // Set commentCount
+    // const selectedVideoComments = selectedVideo.comments;
+    // setCommentCount(selectedVideoComments.length);
 
-    // filter imported video list and set
-    const filteredSideVideos = VideoList.filter((video) => {
-        return video.id !== selectedVideo.id;
-    });
-    setSideVideos(filteredSideVideos);
 
-    // define comment count
-    const selectedVideoComments = selectedVideo.comments;
-    setCommentCount(selectedVideoComments.length);
-    }, [selectedVideo]);
+
+ 
+  if (!selectedVideo || !videoList) {
+    return <p>Loading...</p>;
+  }
+
+
 
 
 
   return (
-    <div className="vid-page">
-
-      <VideoPlayer video={selectedVideo} />
-
-      <main className="vid-page__main">
-          <section className='vid-page__section'>
-            <VideoDetails video={selectedVideo} />
-            <CommentForm commentCount={commentCount}/>
-            <Comments video={selectedVideo} />
-          </section>
-          <SideVideos videos={sideVideos}/>
-      </main>
-
-    </div>
+      <div className="vid-page">
+        <VideoPlayer video={selectedVideo} />
+        <main className="vid-page__main">
+            <section className='vid-page__section'>
+              <VideoDetails video={selectedVideo} />
+              <CommentForm commentCount={commentCount}/>
+              <Comments video={selectedVideo} />
+            </section>
+            <SideVideos videos={sideVideos}/>
+          </main>
+      </div>
+      
+    
   );
+
+
 }
+
+
+
+
 
 export default VideoPage;
