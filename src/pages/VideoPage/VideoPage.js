@@ -1,6 +1,7 @@
 import './VideoPage.scss';
 import { useState , useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { axios } from "axios";
 
 // IMPORT COMPONENTS
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.js";
@@ -14,6 +15,30 @@ import VideoListDetails from "../../data/video-details.json";
 import VideoList from "../../data/videos.json";
 
 
+// api call data functions
+
+const url = "https://project-2-api.herokuapp.com"
+const apiKey = "?api_key=" + "dfbe66f6-bc9d-4510-97aa-90a56ae5f1b0"
+
+const fetchVideos = async () => {
+  try {
+    return await axios.get(url + "/videos" + apiKey)
+
+  } catch (error) {
+    console.log("fetchVideos API request failed")
+  }
+}
+
+const fetchVideoDetails = async (videoId) => {
+  try {
+    return await axios.get(url + "/videos/" + videoId + apiKey)
+
+  } catch (error) {
+    console.log("fetchVideosDetails API request failed")
+  }
+}
+
+
 function VideoPage() {
 
   // DEFINING STATES 
@@ -22,9 +47,14 @@ function VideoPage() {
   const [commentCount, setCommentCount] = useState(0);
 
 
-  const { videoId } = useParams();
+  // fetch data
 
-// When videoId is changed, rerender selectedVideo
+
+
+
+  // When videoId is changed, rerender selectedVideo
+
+  const { videoId } = useParams();
 
   useEffect(() => {
     VideoListDetails.forEach((video) => {
