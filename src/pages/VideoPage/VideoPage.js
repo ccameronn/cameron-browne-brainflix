@@ -12,13 +12,16 @@ import SideVideos from "../../components/SideVideos/SideVideos.js";
 
 
 
+
 // FUNCTIONS TO CALL API
 const url = "https://project-2-api.herokuapp.com"
 const apiKey = "?api_key=" + "8e457c3e-7245-4c95-9d54-759c220f1b2d"
 
 const fetchVideos = async () => {
   try {
-    return await axios.get(url + "/videos" + apiKey)
+    const response = await axios.get(url + "/videos" + apiKey);
+    const videoListResponse = response.data;
+    return videoListResponse;
   } catch (error) {
     console.log("fetchVideos api call failed")
   }
@@ -26,20 +29,25 @@ const fetchVideos = async () => {
 
 const fetchVideoDetails = async (videoId) => {
   try {
-    return await axios.get(url + "/videos/" + videoId + apiKey)
+    const response = await axios.get(url + "/videos/" + videoId + apiKey);
+    const videoDetailsResponse = response.data;
+    return videoDetailsResponse;
   } catch (error) {
     console.log("fetchVideoDetails api call failed")
   }
 }
 
 
+
+
 function VideoPage() {
 
   // DEFINING STATES 
-  const [videoList, setvideoList] = useState(null);
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videoList, setvideoList] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState({});
   const [sideVideos, setSideVideos] = useState([]);
   const [commentCount, setCommentCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
 
   const { videoId } = useParams();
@@ -49,22 +57,22 @@ function VideoPage() {
   useEffect(() => {
     const fetchData = async () => {
       // FETCH VIDEO LIST
-      const videoListApiCall = await fetchVideos();
+      const videoListResponse = await fetchVideos();
+      setvideoList(videoListResponse);
 
       // FETCH SELECTED VIDEO DETAILS
 
-      let videoDetailsApiCall = {};
-
       if (videoId) {
-        let videoDetailsApiCall = await fetchVideoDetails(videoId);
+         const videoDetailsResponse = await fetchVideoDetails(videoId);
+         setSelectedVideo(videoDetailsResponse);
+
+         
       } else {
-        let videoDetailsApiCall = await fetchVideoDetails(videoListApiCall.data[0].id)
-      
+        const videoDetailsResponse = await fetchVideoDetails(videoListResponse[0].id)
+        setSelectedVideo(videoDetailsResponse);
       }
 
-      setvideoList(videoListApiCall.data);
-      setSelectedVideo(videoDetailsApiCall.data);
-
+      setIsLoading(false);
 
     }
     
@@ -74,26 +82,26 @@ function VideoPage() {
   }, [videoId]);
 
 
-
-    // //  Set sideVideos
-    // const filteredVideos = videoList.filter((video) => {
-    //   return video.id !== selectedVideo.id;
-    // });
-    // setSideVideos(filteredVideos);
+  useEffect(() => {
+      if (isLoading === false) {
+        // Set commentCount
+        const selectedVideoComments = selectedVideo.comments;
+        setCommentCount(selectedVideoComments.length);
     
-    // // Set commentCount
-    // const selectedVideoComments = selectedVideo.comments;
-    // setCommentCount(selectedVideoComments.length);
+        //  Set sideVideos
+        const filteredVideos = videoList.filter((video) => {
+          return video.id !== selectedVideo.id;
+        });
+        setSideVideos(filteredVideos);
+      }
 
+  }, [selectedVideo])
 
 
  
-  if (!selectedVideo || !videoList) {
+  if (isLoading === true) {
     return <p>Loading...</p>;
   }
-
-
-
 
 
   return (
@@ -108,10 +116,8 @@ function VideoPage() {
             <SideVideos videos={sideVideos}/>
           </main>
       </div>
-      
     
   );
-
 
 }
 
