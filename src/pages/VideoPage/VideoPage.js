@@ -3,6 +3,7 @@ import { useState , useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+
 // IMPORT COMPONENTS
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer.js";
 import VideoDetails from "../../components/VideoDetails/VideoDetails.js";
@@ -13,44 +14,43 @@ import SideVideos from "../../components/SideVideos/SideVideos.js";
 
 
 
-// FUNCTIONS TO CALL API
-const url = "https://project-2-api.herokuapp.com"
-const apiKey = "?api_key=" + "8e457c3e-7245-4c95-9d54-759c220f1b2d"
-
-const fetchVideos = async () => {
-  try {
-    const response = await axios.get(url + "/videos" + apiKey);
-    const videoListResponse = response.data;
-    return videoListResponse;
-  } catch (error) {
-    console.log("fetchVideos api call failed")
-  }
-}
-
-const fetchVideoDetails = async (videoId) => {
-  try {
-    const response = await axios.get(url + "/videos/" + videoId + apiKey);
-    const videoDetailsResponse = response.data;
-    return videoDetailsResponse;
-  } catch (error) {
-    console.log("fetchVideoDetails api call failed")
-  }
-}
-
-
-
-
 function VideoPage() {
 
   // DEFINING STATES 
   const [videoList, setvideoList] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState({});
-  const [sideVideos, setSideVideos] = useState([]);
-  const [commentCount, setCommentCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
 
   const { videoId } = useParams();
+
+
+  
+  // FUNCTIONS TO CALL API
+  const URL = "https://project-2-api.herokuapp.com"
+  const API_KEY ="8e457c3e-7245-4c95-9d54-759c220f1b2d"
+
+  const fetchVideos = async () => {
+    try {
+      const response = await axios.get(`${URL}/videos?api_key=${API_KEY}`);
+      const videoListResponse = response.data;
+      return videoListResponse;
+    } catch (error) {
+      console.log("fetchVideos api call failed")
+    }
+  }
+
+  const fetchVideoDetails = async (videoId) => {
+    try {
+      const response = await axios.get(`${URL}/videos/${videoId}?api_key=${API_KEY}`);
+      const videoDetailsResponse = response.data;
+      return videoDetailsResponse;
+    } catch (error) {
+      console.log("fetchVideoDetails api call failed")
+    }
+  }
+
+
 
   // FETCH and SET VIDEO LIST AND SELECTED VIDEO DETAILS WHEN VIDEO ID CHANGES
 
@@ -60,42 +60,26 @@ function VideoPage() {
       const videoListResponse = await fetchVideos();
       setvideoList(videoListResponse);
 
-      // FETCH SELECTED VIDEO DETAILS
 
+      // FETCH SELECTED VIDEO DETAILS
       if (videoId) {
          const videoDetailsResponse = await fetchVideoDetails(videoId);
          setSelectedVideo(videoDetailsResponse);
-
-         
       } else {
         const videoDetailsResponse = await fetchVideoDetails(videoListResponse[0].id)
         setSelectedVideo(videoDetailsResponse);
       }
 
       setIsLoading(false);
-
     }
     
     fetchData()
 
-
   }, [videoId]);
 
 
-  useEffect(() => {
-      if (isLoading === false) {
-        // Set commentCount
-        const selectedVideoComments = selectedVideo.comments;
-        setCommentCount(selectedVideoComments.length);
-    
-        //  Set sideVideos
-        const filteredVideos = videoList.filter((video) => {
-          return video.id !== selectedVideo.id;
-        });
-        setSideVideos(filteredVideos);
-      }
 
-  }, [selectedVideo])
+
 
 
  
@@ -104,17 +88,32 @@ function VideoPage() {
   }
 
 
+  // DEFINE PROPS TO PASS DOWN
+  // selected Video image
+  const selectedVideoImage = selectedVideo.image;
+
+  // Comments 
+  const selectedVideoComments = selectedVideo.comments;
+  // Comment count
+  const commentCount =  selectedVideoComments.length;
+
+  // Filter videos for SideVideos
+  const filteredVideos = videoList.filter((video) => {
+    return video.id !== selectedVideo.id;
+  });
+
+
   return (
       <div className="vid-page">
-        <VideoPlayer video={selectedVideo} />
+        <VideoPlayer videoImage={selectedVideoImage} />
         <main className="vid-page__main">
             <section className='vid-page__section'>
               <VideoDetails video={selectedVideo} />
               <CommentForm commentCount={commentCount}/>
-              <Comments video={selectedVideo} />
+              <Comments comments={selectedVideoComments} />
             </section>
-            <SideVideos videos={sideVideos}/>
-          </main>
+            <SideVideos videos={filteredVideos}/>
+        </main>
       </div>
     
   );

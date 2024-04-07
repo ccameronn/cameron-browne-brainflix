@@ -5,12 +5,12 @@ function convertDate(timestamp) {
     return (time.toLocaleDateString())
 }
 
-const Comments = ({video}) => {
+const Comments = ({comments}) => {
   
   return (
 
     <section className="comment-list">
-      {video.comments.map((comment) => (
+      {comments.map((comment) => (
         <article className="comment" key={comment.id}>
           <div className="comment__icon"></div>
           <div className="comment__main">

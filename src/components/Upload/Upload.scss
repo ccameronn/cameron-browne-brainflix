@@ -67,6 +67,7 @@
     @include mobile-label-button;
     color: $BrainFlix-Blue;
     padding-top: 2rem;
+    cursor: pointer;
 
     @include tablet {
       padding: 0;
@@ -79,14 +80,28 @@
 .upload-form {
   @include tablet {
     padding-top: 1rem;
-    margin-bottom: 1rem;;
+    margin-bottom: 1rem;
     border-top: 1px solid $BrainFlix-Mercury;
-    border-bottom: 1px solid $BrainFlix-Mercury;
   }
 
   @include desktop {
     display: flex;
+    flex-direction: column;
   }
+
+  &__top {
+    @include tablet {
+      border-bottom: 1px solid $BrainFlix-Mercury;
+      margin-bottom: 1rem;
+    }
+
+    @include desktop {
+      display: flex;
+      // flex-direction: column;
+    }
+  }
+
+
 
   &__label {
     display: flex;

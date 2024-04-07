@@ -15,6 +15,7 @@ const SideVideos = ({videos}) => {
             <li
               onClick={() => {
                 navigate(`/video/${video.id}`);
+                window.scrollTo(0, 0);
               }}
               key={video.id}
               className="video-list-item"

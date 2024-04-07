@@ -1,8 +1,7 @@
 import "./VideoPlayer.scss";
 
 
-const VideoPlayer = ({video}) => {
-
+const VideoPlayer = ({videoImage}) => {
 
   return (
     <div className="video-container">
@@ -11,7 +10,7 @@ const VideoPlayer = ({video}) => {
         className="video"
         width="100%"
         height="100%"
-        poster={video.image}
+        poster={videoImage}
         controls
       >
         <source src="" type="video/mp4" />
