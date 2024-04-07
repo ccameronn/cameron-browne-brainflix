@@ -9,7 +9,7 @@ const CommentForm = ({ commentCount }) => {
       <article className="form">
         <div className="form__icon"></div>
         <form className="form__fields-container">
-          <label for="text">JOIN THE CONVERSATION</label>
+          <label htmlFor="text">JOIN THE CONVERSATION</label>
           <div className="form__fields">
             <textarea
             placeholder="Add a new comment"

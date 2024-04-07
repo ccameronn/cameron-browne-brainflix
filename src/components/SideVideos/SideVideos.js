@@ -26,7 +26,7 @@ const SideVideos = ({videos}) => {
                   className="video-list-item__thumbnail-image"
                 />
               </div>
-              <div class="video-list-item__details">
+              <div className="video-list-item__details">
                 <h3 className="video-list-item__title">{video.title}</h3>
                 <p className="video-list-item__channel">{video.channel}</p>
               </div>
