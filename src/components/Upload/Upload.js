@@ -28,6 +28,7 @@ function Upload({title, description, handleSubmit, handleTitleChange, handleCanc
                 required
                 type="text"
                 id="upload-title"
+                name="title"
                 className="upload-form__input"
                 value={title}
                 onChange={handleTitleChange}
@@ -41,6 +42,7 @@ function Upload({title, description, handleSubmit, handleTitleChange, handleCanc
                 required
                 type="text"
                 id="upload-description"
+                name="description"
                 className="upload-form__input"
                 value={description}
                 onChange={handleDescriptionChange}

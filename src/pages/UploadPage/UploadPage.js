@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 
 import Upload from "../../components/Upload/Upload.js";
 
@@ -23,6 +24,21 @@ function UploadPage() {
     });
 
 
+
+  const BACKEND_URL = "http://localhost:8080"
+
+  const updateVideos = async (title, description) => {
+    try {
+      const response = await axios.post(`${BACKEND_URL}/videos`, {"title": title, "description": description});
+      const updateVideoResponse = response.data;
+      return updateVideoResponse;
+    } catch (error) {
+      console.log("updateVideos api call failed")
+    }
+  }
+  
+
+
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -33,6 +49,13 @@ function UploadPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const data = new FormData(event.target);
+    const title = data.get("title");
+    const description = data.get("description");
+
+    updateVideos(title, description)
+    
     notify();
     setTimeout(() => navigate('/'), 6000);
   };
