@@ -27,12 +27,11 @@ function VideoPage() {
 
   
   // FUNCTIONS TO CALL API
-  const URL = "https://project-2-api.herokuapp.com"
-  const API_KEY ="8e457c3e-7245-4c95-9d54-759c220f1b2d"
+  const BACKEND_URL = "http://localhost:8080"
 
   const fetchVideos = async () => {
     try {
-      const response = await axios.get(`${URL}/videos?api_key=${API_KEY}`);
+      const response = await axios.get(`${BACKEND_URL}/videos`);
       const videoListResponse = response.data;
       return videoListResponse;
     } catch (error) {
@@ -42,7 +41,7 @@ function VideoPage() {
 
   const fetchVideoDetails = async (videoId) => {
     try {
-      const response = await axios.get(`${URL}/videos/${videoId}?api_key=${API_KEY}`);
+      const response = await axios.get(`${BACKEND_URL}/videos/${videoId}`);
       const videoDetailsResponse = response.data;
       return videoDetailsResponse;
     } catch (error) {
