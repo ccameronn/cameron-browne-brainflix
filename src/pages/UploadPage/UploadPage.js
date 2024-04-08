@@ -54,7 +54,7 @@ function UploadPage() {
     const title = data.get("title");
     const description = data.get("description");
 
-    updateVideos(title, description)
+    updateVideos(title, description);
     
     notify();
     setTimeout(() => navigate('/'), 6000);
